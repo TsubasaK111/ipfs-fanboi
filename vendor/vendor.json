@@ -1,6 +1,13 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
-	"rootPath": "github.com/tsubasak111/polyglottal"
+	"package": [
+		{
+			"checksumSHA1": "ydjlNEE/+DQzdGhgO1KCe68osqs=",
+			"path": "golang.org/x/tour/pic",
+			"revision": "d642b9371986f5bb2152547a0d525a57f634c3ef",
+			"revisionTime": "2018-08-08T13:04:50Z"
+		}
+	],
+	"rootPath": "github.com/tsubasak111/golang-playground"
 }
