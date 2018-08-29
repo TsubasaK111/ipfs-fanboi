@@ -19,8 +19,6 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-	conso
-
 	http.HandleFunc("/", sayHello)
 	if err := http.ListenAndServe(":"+string(port), nil); err != nil {
 		panic(err)
