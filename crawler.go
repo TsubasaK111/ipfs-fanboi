@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 )
 
 func crawl() {
@@ -33,8 +35,23 @@ func crawl() {
 
 	aggregateItems = sortItems(aggregateItems)
 
-	itemsJson := stringifyItems(aggregateItems)
-	writeJson(itemsJson, "/tmp/dashboard.json")
+	itemsJson := stringifyJson(aggregateItems)
+	writeJson(itemsJson, "./tmp/dashboard.json")
+}
+
+func syncWrite(content []byte, filePath string) {
+	fmt.Println(string(content))
+
+	f, err := os.Create(filePath)
+	check(err, "")
+
+	defer fmt.Println("should close ")
+	defer f.Close()
+
+	res, err := f.Write(content)
+	fmt.Printf("wrote %d bytes\n", res)
+
+	f.Sync()
 }
 
 func get(url string) []byte {
