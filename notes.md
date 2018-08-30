@@ -2,13 +2,13 @@
 ``` json
 items: [
   {
-    name: "",
+    Name: "",
       // github: =
       // reddit: data.subreddit_name_prefixed + data.title
-    description: "",
+    Description: "",
       // github: =
       // reddit: data.selftext
-    url: "",
+    Url: "",
       // github: html_url
       // reddit: data.url
     created_at: "",
@@ -17,8 +17,8 @@ items: [
     updated_at: "",
       // github: =
       // reddit: nil (or last comment post time?)
-    source: "github", //etc
-    gravity: 139432
+    Source: "github", //etc
+    Gravity: 139432
        // github: stargazers_count + watchers_count
        // reddit: ups + num_comments
   },

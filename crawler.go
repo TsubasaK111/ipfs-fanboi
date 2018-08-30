@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 )
@@ -24,12 +23,17 @@ func crawl() {
 
 	githubItems := convertGithubJson(githubJson)
 	redditItems := convertRedditJson(redditJson)
+	twitterItems := convertTwitterJson(twitterJson)
 
-	aggregateItems := append(githubItems, redditItems...)
-	fmt.Println(aggregateItems)
-	// other items
-	itemsJson := stringifyJson(githubItems)
-	fmt.Println(itemsJson)
+	aggregateItems := concatItems([]Items{
+		githubItems,
+		redditItems,
+		twitterItems,
+	})
+
+	aggregateItems = sortItems(aggregateItems)
+
+	itemsJson := stringifyItems(aggregateItems)
 	writeJson(itemsJson, "/tmp/dashboard.json")
 }
 
