@@ -4,6 +4,5 @@ build:
   languages:
     - go
     - node
-
 run:
   web: golang-playground
