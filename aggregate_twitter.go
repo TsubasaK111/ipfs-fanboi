@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
 	"os"
 
@@ -18,8 +17,7 @@ func twitterSearch() []byte {
 
 	searchResults := searchTweets(client)
 
-	jsonResults, err := json.Marshal(searchResults)
-	check(err, "")
+	jsonResults := stringifyJson(searchResults)
 
 	return jsonResults
 }

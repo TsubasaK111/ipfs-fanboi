@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/url"
-	"time"
 )
 
 func crawl() {
@@ -25,8 +23,13 @@ func crawl() {
 	writeJson(githubJson, "./tmp/github.json")
 
 	githubItems := convertGithubJson(githubJson)
+	redditItems := convertRedditJson(redditJson)
+
+	aggregateItems := append(githubItems, redditItems...)
+	fmt.Println(aggregateItems)
 	// other items
-	itemsJson := itemsToJson(githubItems)
+	itemsJson := stringifyJson(githubItems)
+	fmt.Println(itemsJson)
 	writeJson(itemsJson, "/tmp/dashboard.json")
 }
 
@@ -47,41 +50,4 @@ func get(url string) []byte {
 	check(err, "read error:")
 
 	return []byte(string(body))
-}
-
-type Item struct {
-	name        string
-	description string
-	url         url.URL
-	created_at  time.Time
-	updated_at  time.Time
-	source      string
-	gravity     int
-}
-
-func convertGithubJson(githubJson []byte) []Item {
-	parsed := parseJson(githubJson)
-
-	// lots of typecasting!
-	rawItems := parsed["items"].([]interface{})
-
-	rawItem := rawItems[0].(map[string]interface{})
-	itemName := rawItem["name"].(string)
-	itemDescription := rawItem["description"].(string)
-	itemUrl := rawItem["url"].(string)
-
-	fmt.Println(itemName, itemDescription, itemUrl)
-
-	// for _, rawItem := range rawItems {
-	// }
-	item := Item{name: "Sean", description: "50"}
-	item2 := Item{name: "Sean", description: "50"}
-
-	items := []Item{item, item2}
-
-	return items
-}
-
-func itemsToJson(items []Item) []byte {
-	return []byte("wat")
 }
