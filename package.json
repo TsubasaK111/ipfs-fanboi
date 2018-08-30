@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "./ipfs-fanboi",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && go build",
+    "build": "vue-cli-service build",
     "heroku-postbuild": "yarn build",
     "lint": "vue-cli-service lint"
   },
