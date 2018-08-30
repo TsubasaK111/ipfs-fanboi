@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
+	"time"
 )
 
 func crawl() {
@@ -15,17 +18,22 @@ func crawl() {
 	wikiArticleJson := get("https://en.wikipedia.org/w/api.php?action=parser-migration&title=InterPlanetary_File_System&format=json&config=new")
 	writeJson(wikiArticleJson, "./tmp/wikiArticle.json")
 
+	twitterJson := twitterSearch()
+	writeJson(twitterJson, "./tmp/twitter.json")
+
 	githubJson := get("https://api.github.com/search/repositories?q=ipfs&sort=updated&order=desc")
 	writeJson(githubJson, "./tmp/github.json")
 
-	twitterJson := twitterSearch()
-	writeJson(twitterJson, "./tmp/twitter.json")
+	githubItems := convertGithubJson(githubJson)
+	// other items
+	itemsJson := itemsToJson(githubItems)
+	writeJson(itemsJson, "/tmp/dashboard.json")
 }
 
 func get(url string) []byte {
 	client := &http.Client{}
 
-	// resp, err := http.Get("https://www.reddit.com/search.json?q=ipfs")
+	// resp, err := http.Get(url)
 	req, err := http.NewRequest("GET", url, nil)
 	check(err, "")
 
@@ -39,4 +47,41 @@ func get(url string) []byte {
 	check(err, "read error:")
 
 	return []byte(string(body))
+}
+
+type Item struct {
+	name        string
+	description string
+	url         url.URL
+	created_at  time.Time
+	updated_at  time.Time
+	source      string
+	gravity     int
+}
+
+func convertGithubJson(githubJson []byte) []Item {
+	parsed := parseJson(githubJson)
+
+	// lots of typecasting!
+	rawItems := parsed["items"].([]interface{})
+
+	rawItem := rawItems[0].(map[string]interface{})
+	itemName := rawItem["name"].(string)
+	itemDescription := rawItem["description"].(string)
+	itemUrl := rawItem["url"].(string)
+
+	fmt.Println(itemName, itemDescription, itemUrl)
+
+	// for _, rawItem := range rawItems {
+	// }
+	item := Item{name: "Sean", description: "50"}
+	item2 := Item{name: "Sean", description: "50"}
+
+	items := []Item{item, item2}
+
+	return items
+}
+
+func itemsToJson(items []Item) []byte {
+	return []byte("wat")
 }

@@ -20,11 +20,11 @@ func writeJson(wildJson []byte, filePath string) {
 
 }
 
-func parseJson(wildJson []byte) interface{} {
-	var response interface{}
+func parseJson(wildJson []byte) map[string]interface{} {
+	var result map[string]interface{}
 
-	err := json.Unmarshal(wildJson, &response)
+	err := json.Unmarshal(wildJson, &result)
 	check(err, "")
 
-	return response
+	return result
 }

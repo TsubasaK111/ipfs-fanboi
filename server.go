@@ -24,6 +24,7 @@ func server() {
 	http.HandleFunc("/api/wikipedia/", getWikipedia)
 	http.HandleFunc("/api/github/", getGithub)
 	http.HandleFunc("/api/twitter/", getTwitter)
+	http.HandleFunc("/api/dashboard/", getDashboard)
 
 	if err := http.ListenAndServe(":"+string(port), nil); err != nil {
 		panic(err)
@@ -55,6 +56,11 @@ func getGithub(w http.ResponseWriter, r *http.Request) {
 
 func getTwitter(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/twitter.json")
+	w.Write(jsonString)
+}
+
+func getDashboard(w http.ResponseWriter, r *http.Request) {
+	jsonString := readJson("./tmp/dashboard.json")
 	w.Write(jsonString)
 }
 

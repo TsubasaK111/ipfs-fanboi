@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 
@@ -18,7 +17,6 @@ func twitterSearch() []byte {
 	// statusTweet := getStatus(client)
 
 	searchResults := searchTweets(client)
-	fmt.Println(searchResults)
 
 	jsonResults, err := json.Marshal(searchResults)
 	check(err, "")
