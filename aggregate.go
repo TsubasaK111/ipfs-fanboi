@@ -1,7 +1,6 @@
 package main
 
 import (
-	"net/url"
 	"sort"
 	"time"
 )
@@ -9,7 +8,7 @@ import (
 type Item struct {
 	Name        string
 	Description string
-	Url         url.URL
+	Url         string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 	Source      string

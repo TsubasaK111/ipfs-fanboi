@@ -26,11 +26,12 @@ func convertGithubJson(githubJson []byte) []Item {
 		watchersCount, boolErr := freshItem["watchers_count"].(int)
 		itemGravity := stargazersCount + watchersCount
 		check(err, "")
+		checkBool(boolErr, "")
 
 		item := Item{
 			Name:        itemName,
 			Description: itemDescription,
-			Url:         *itemUrl,
+			Url:         itemUrl.String(),
 			CreatedAt:   itemCreatedAt,
 			UpdatedAt:   itemUpdatedAt,
 			Source:      "github",

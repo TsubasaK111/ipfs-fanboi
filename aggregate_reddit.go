@@ -28,11 +28,12 @@ func convertRedditJson(redditJson []byte) []Item {
 		numComments, boolErr := rawItemData["num_comments"].(int)
 		itemGravity := ups + numComments
 		check(err, "")
+		checkBool(boolErr, "")
 
 		item := Item{
 			Name:        itemName,
 			Description: itemDescription,
-			Url:         *itemUrl,
+			Url:         itemUrl.String(),
 			CreatedAt:   itemCreatedAt,
 			UpdatedAt:   itemCreatedAt,
 			Source:      "reddit",

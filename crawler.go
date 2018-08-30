@@ -36,7 +36,7 @@ func crawl() {
 	aggregateItems = sortItems(aggregateItems)
 
 	itemsJson := stringifyJson(aggregateItems)
-	writeJson(itemsJson, "./tmp/dashboard.json")
+	writeJson(itemsJson, "./tmp/all.json")
 }
 
 func syncWrite(content []byte, filePath string) {
