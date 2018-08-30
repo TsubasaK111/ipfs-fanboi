@@ -14,5 +14,8 @@
 # Output from crawler
 tmp/
 
+# Compiled Binary
+golang-playground
+
 # Dependencies should be fetched at buildtime
 vendor/*/**/*
