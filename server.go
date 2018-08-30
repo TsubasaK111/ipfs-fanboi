@@ -19,12 +19,16 @@ func server() {
 	}
 	log.Println("go server listening on PORT", port, "!")
 
-	http.HandleFunc("/", respondHello)
-	http.HandleFunc("/api/feeds/", getFeeds)
-	http.HandleFunc("/api/feeds/reddit/", getReddit)
-	http.HandleFunc("/api/feeds/wikipedia/", getWikipedia)
-	http.HandleFunc("/api/feeds/github/", getGithub)
-	http.HandleFunc("/api/feeds/twitter/", getTwitter)
+	fs := http.FileServer(http.Dir("./dist"))
+	http.Handle("/", fs)
+	// http.Handle("/", http.FileServer(http.Dir("./public")))
+
+	http.HandleFunc("/api/hello", respondHello)
+	http.HandleFunc("/api/feeds", getFeeds)
+	http.HandleFunc("/api/feeds/reddit", getReddit)
+	http.HandleFunc("/api/feeds/wikipedia", getWikipedia)
+	http.HandleFunc("/api/feeds/github", getGithub)
+	http.HandleFunc("/api/feeds/twitter", getTwitter)
 
 	if err := http.ListenAndServe(":"+string(port), nil); err != nil {
 		panic(err)
