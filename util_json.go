@@ -16,8 +16,14 @@ func writeJson(wildJson []byte, filePath string) {
 	err := ioutil.WriteFile(filePath, wildJson, 0644)
 	// file, err := os.Create("./tmp/dat1", wildJson)
 	// defer file.Close()
-	check(err, "")
+	check(err, "writing to json file failed")
+}
 
+func stringifyJson(items interface{}) []byte {
+	jsonResults, err := json.Marshal(items)
+	check(err, "WOAH")
+
+	return jsonResults
 }
 
 func parseJson(wildJson []byte) map[string]interface{} {
