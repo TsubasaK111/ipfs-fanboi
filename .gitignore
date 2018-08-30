@@ -15,7 +15,7 @@
 tmp/
 
 # Compiled Binary
-golang-playground
+ipfs-fanboi
 
 # Dependencies should be fetched at buildtime
 vendor/*/**/*

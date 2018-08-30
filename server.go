@@ -59,3 +59,4 @@ func getTwitter(w http.ResponseWriter, r *http.Request) {
 }
 
 // TODO: Hackernews?
+// https://github.com/HackerNews/API
