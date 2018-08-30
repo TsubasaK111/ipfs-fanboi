@@ -23,6 +23,7 @@ func server() {
 	http.HandleFunc("/api/reddit/", getReddit)
 	http.HandleFunc("/api/wikipedia/", getWikipedia)
 	http.HandleFunc("/api/github/", getGithub)
+	http.HandleFunc("/api/twitter/", getTwitter)
 
 	if err := http.ListenAndServe(":"+string(port), nil); err != nil {
 		panic(err)
@@ -51,3 +52,10 @@ func getGithub(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/github.json")
 	w.Write(jsonString)
 }
+
+func getTwitter(w http.ResponseWriter, r *http.Request) {
+	jsonString := readJson("./tmp/twitter.json")
+	w.Write(jsonString)
+}
+
+// TODO: Hackernews?

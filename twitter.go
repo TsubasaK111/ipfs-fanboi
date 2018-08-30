@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -9,14 +10,34 @@ import (
 	"github.com/dghubble/oauth1"
 )
 
-func twitterSearch() {
+func twitterSearch() []byte {
+	client := setupClient()
 
+	// sentTweet := sendTweet(client)
+	// timelineTweets := getTimeline(client)
+	// statusTweet := getStatus(client)
+
+	searchResults := searchTweets(client)
+	fmt.Println(searchResults)
+
+	jsonResults, err := json.Marshal(searchResults)
+	check(err, "")
+
+	return jsonResults
+}
+
+func setupClient() *twitter.Client {
 	consumerKey := os.Getenv("TWITTER_CONSUMER_KEY")
 	consumerSecret := os.Getenv("TWITTER_CONSUMER_SECRET")
 	accessToken := os.Getenv("TWITTER_ACCESS_TOKEN")
 	accessSecret := os.Getenv("TWITTER_ACCESS_SECRET")
 	if consumerKey == "" || consumerSecret == "" || accessToken == "" || accessSecret == "" {
-		log.Fatal("TWITTER_* env vars must be set:", consumerKey, consumerSecret, accessToken, accessSecret)
+		log.Fatal("TWITTER_* env vars must be set:\n",
+			"consumerKey:", consumerKey,
+			"consumerSecret:", consumerSecret,
+			"accessToken:", accessToken,
+			"accessSecret:", accessSecret,
+		)
 	}
 
 	config := oauth1.NewConfig(consumerKey, consumerSecret)
@@ -27,26 +48,34 @@ func twitterSearch() {
 	// Twitter client
 	client := twitter.NewClient(httpClient)
 
+	return client
+}
+
+func searchTweets(client *twitter.Client) *twitter.Search {
+	search, _, err := client.Search.Tweets(&twitter.SearchTweetParams{
+		Query: "ipfs",
+	})
+	check(err, "")
+	return search
+}
+
+func getStatus(client *twitter.Client) *twitter.Tweet {
+	tweet, _, err := client.Statuses.Show(585613041028431872, nil)
+	check(err, "")
+	return tweet
+}
+
+func sendTweet(client *twitter.Client) *twitter.Tweet {
+	tweet, _, err := client.Statuses.Update("just setting up my twttr", nil)
+	check(err, "")
+	return tweet
+}
+
+func getTimeline(client *twitter.Client) []twitter.Tweet {
 	// Home Timeline
-	tweets, resp, err := client.Timelines.HomeTimeline(&twitter.HomeTimelineParams{
+	tweets, _, err := client.Timelines.HomeTimeline(&twitter.HomeTimelineParams{
 		Count: 20,
 	})
-	fmt.Println(tweets)
-
-	// Send a Tweet
-	tweet, resp, err := client.Statuses.Update("just setting up my twttr", nil)
-	fmt.Println(tweet)
 	check(err, "")
-
-	// Status Show
-	tweet, resp, err = client.Statuses.Show(585613041028431872, nil)
-	check(err, "")
-	fmt.Println(tweet, resp)
-
-	// Search Tweets
-	search, resp, err := client.Search.Tweets(&twitter.SearchTweetParams{
-		Query: "gopher",
-	})
-	check(err, "")
-	fmt.Println(search, resp)
+	return tweets
 }

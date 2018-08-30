@@ -18,7 +18,8 @@ func crawl() {
 	githubJson := get("https://api.github.com/search/repositories?q=ipfs&sort=updated&order=desc")
 	writeJson(githubJson, "./tmp/github.json")
 
-	twitterSearch()
+	twitterJson := twitterSearch()
+	writeJson(twitterJson, "./tmp/twitter.json")
 }
 
 func get(url string) []byte {
