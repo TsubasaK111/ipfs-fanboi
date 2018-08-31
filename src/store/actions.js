@@ -1,6 +1,7 @@
 // const apiUrl = "https://cc5-assessment-halfway-tsubasa.herokuapp.com";
-const apiUrl = "http://localhost:8081";
+if (!process.env.PORT) throw Error ('please define a $PORT.');
 
+const apiUrl = process.env.HEROKU_APP_NAME ? `https://${process.env.HEROKU_APP_NAME}.herokuapp.com/` : `http://localhost:${process.env.PORT}`;
 
 export const actions = {
   getAllFeeds(context) {
