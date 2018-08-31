@@ -7,14 +7,6 @@
         app
       >
         <v-list dense>
-          <v-list-tile @click="newNote">
-            <v-list-tile-action>
-              <v-icon>fiber_new</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Create New Note</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
           <NavNotesItem
             v-on:select-note="currentNote=note.id"
             v-for="note in this.$store.state.notes"
@@ -24,23 +16,13 @@
         </v-list>
       </v-navigation-drawer>
       <v-toolbar color="indigo" dark fixed app>
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Code Chrysalis Notes</v-toolbar-title>
+        <!-- <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon> -->
+        <v-toolbar-title>IPFS Fanboi </v-toolbar-title>
       </v-toolbar>
       <v-content>
+        <div>Hai Guys!</div>
+        <div>:trollface:</div>
         <FeedList />
-        <v-container fluid fill-height>
-          <v-layout
-            justify-center
-            align-center
-          >
-            <v-flex text-xs-center>
-              <!-- <div>{{this.$store.state.notes.filter(note => note.id === currentNote)}}</div> -->
-              <div>{{this.$store.state}}</div>
-              <div>:trollface:</div>
-            </v-flex>
-          </v-layout>
-        </v-container>
       </v-content>
       <v-footer color="indigo" app inset>
       </v-footer>    
