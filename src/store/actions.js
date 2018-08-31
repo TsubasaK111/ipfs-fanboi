@@ -1,10 +1,14 @@
 // const apiUrl = "https://cc5-assessment-halfway-tsubasa.herokuapp.com";
-if (!process.env.PORT) throw Error ('please define a $PORT.');
 
-const apiUrl = process.env.HEROKU_APP_NAME ? `https://${process.env.HEROKU_APP_NAME}.herokuapp.com` : `http://localhost:${process.env.PORT}`;
+// if (!process.env.PORT) throw Error ('please define a $PORT.');
+// const apiUrl = process.env.HEROKU_APP_NAME ? `https://${process.env.HEROKU_APP_NAME}.herokuapp.com` : `http://localhost:${process.env.PORT}`;
+// const apiUrl = `http://localhost:8080`;
+const apiUrl = `https://ipfs-fanboi.herokuapp.com`
 
 export const actions = {
   getAllFeeds(context) {
+    console.log('getting all feeds...')
+
     fetch(`${apiUrl}/api/feeds`)
       .then(response => {
         console.log(response)

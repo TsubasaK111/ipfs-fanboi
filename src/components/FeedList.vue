@@ -1,6 +1,9 @@
 <template>
   <v-list three-line>
-    <div v-for="(item, index) in this.$store.state.items">
+    <div 
+      v-for="(item, index) in this.$store.state.items" 
+      :key="index"
+    >
       <!-- <v-subheader
         v-if="item.header"
         :key="item.header"
@@ -41,12 +44,12 @@
 
 <script>
 export default {
-  name: 'NavNotesItem',
+  name: "NavNotesItem",
   methods: {
     openItem(url) {
-      const win = window.open(url, '_blank');
+      const win = window.open(url, "_blank");
       win.focus();
     }
   }
-}
+};
 </script>

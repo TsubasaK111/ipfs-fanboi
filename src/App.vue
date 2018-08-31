@@ -53,8 +53,8 @@ export default {
     FeedList,
   },
   created() {
-    // this.$store.dispatch("getAllNotes");
     this.$store.dispatch("getAllFeeds");
+    this.$store.dispatch("getAllNotes");
   }
 };
 </script>
