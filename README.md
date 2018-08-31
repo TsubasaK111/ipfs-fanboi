@@ -1,4 +1,11 @@
-# ipfs-fanboi
+# Welcome to IPFS Fanboi!
+IPFS Fanboi is an aggregated feedlist of all the activity that is taking place regarding IPFS.  
+Sources include:
+- github
+- reddit
+- twitter
+- wikipedia
+- hackernews (wip)
 
 ## Project setup
 ```
