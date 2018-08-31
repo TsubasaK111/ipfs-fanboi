@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    
     <v-app>
       <v-navigation-drawer
         fixed
@@ -31,13 +28,15 @@
         <v-toolbar-title>Code Chrysalis Notes</v-toolbar-title>
       </v-toolbar>
       <v-content>
+        <FeedList />
         <v-container fluid fill-height>
           <v-layout
             justify-center
             align-center
           >
             <v-flex text-xs-center>
-              <div>{{this.$store.state.notes.filter(note => note.id === currentNote)}}</div>
+              <!-- <div>{{this.$store.state.notes.filter(note => note.id === currentNote)}}</div> -->
+              <div>{{this.$store.state}}</div>
               <div>:trollface:</div>
             </v-flex>
           </v-layout>
@@ -51,8 +50,8 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
 import NavNotesItem from "./components/NavNotesItem.vue";
+import FeedList from "./components/FeedList.vue";
 
 export default {
   name: "app",
@@ -68,11 +67,12 @@ export default {
     }
   },
   components: {
-    HelloWorld,
-    NavNotesItem
+    NavNotesItem,
+    FeedList,
   },
   created() {
-    this.$store.dispatch("getAllNotes");
+    // this.$store.dispatch("getAllNotes");
+    this.$store.dispatch("getAllFeeds");
   }
 };
 </script>
