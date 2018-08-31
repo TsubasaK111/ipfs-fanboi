@@ -1,7 +1,7 @@
 import Vue from "vue";
+import './plugins/vuetify'
 import App from "./App.vue";
 import store from "./store";
-import './plugins/vuetify'
 
 Vue.config.productionTip = false;
 
