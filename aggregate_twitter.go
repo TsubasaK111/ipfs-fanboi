@@ -6,7 +6,7 @@ func convertTwitterJson(twitterJson []byte) []Item {
 
 	var items []Item
 
-	item := Item{Name: "wat"}
+	item := Item{Name: "wat", Description: "twitter mockery!", Source: "twitter"}
 	items = append(items, item)
 
 	return items

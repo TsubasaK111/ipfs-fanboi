@@ -45,6 +45,8 @@ func respondHello(w http.ResponseWriter, r *http.Request) {
 // TODO: time for a closure methinks
 func getFeeds(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/all.json")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(jsonString)
 }
 
