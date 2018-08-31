@@ -20,8 +20,8 @@
         <v-toolbar-title>IPFS Fanboi </v-toolbar-title>
       </v-toolbar>
       <v-content>
-        <div>Hai Guys!</div>
-        <div>:trollface:</div>
+        <h1>Welcome to IPFS Fanboi!</h1>
+        <div>Below is an aggregated feedlist of <br> all the activity that is taking place regarding IPFS:</div>
         <FeedList />
       </v-content>
       <v-footer color="indigo" app inset>
