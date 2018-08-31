@@ -7,22 +7,27 @@ Sources include:
 - wikipedia
 - hackernews (wip)
 
-## Project setup
+![](./screenshot.png)
+
+## Get Started
 ```
 yarn install
+go get -u github.com/kardianos/govendor
+govendor sync
 ```
 
-### Compiles and hot-reloads for development
+### Front-end Dev
 ```
-yarn run serve
+yarn dev
 ```
 
 ### Compiles and minifies for production
 ```
-yarn run build
+yarn build
+go build
 ```
 
 ### Lints and fixes files
 ```
-yarn run lint
+yarn lint
 ```
