@@ -15,14 +15,19 @@ type Item struct {
 	Gravity     int
 }
 
-func sortItems(items []Item) []Item {
-	sort.Slice(items, func(i, j int) bool {
-		return items[i].UpdatedAt.Before(items[j].UpdatedAt)
-	})
+type Items []Item
+
+func (s Items) Len() int           { return len(s) }
+func (s Items) Less(i, j int) bool { return s[i].CreatedAt.Before(s[j].CreatedAt) }
+func (s Items) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
+
+func sortItems(items Items) Items {
+	sort.Sort(sort.Reverse(items))
+	// sort.Slice(items, func(i, j int) bool {
+	// 	return items[i].UpdatedAt.Before(items[j].UpdatedAt)
+	// })
 	return items
 }
-
-type Items []Item
 
 func concatItems(manyItems []Items) Items {
 	var aggregateItems Items

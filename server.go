@@ -52,21 +52,29 @@ func getFeeds(w http.ResponseWriter, r *http.Request) {
 
 func getReddit(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/reddit.json")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(jsonString)
 }
 
 func getWikipedia(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/wikipedia.json")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(jsonString)
 }
 
 func getGithub(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/github.json")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(jsonString)
 }
 
 func getTwitter(w http.ResponseWriter, r *http.Request) {
 	jsonString := readJson("./tmp/twitter.json")
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Write(jsonString)
 }
 

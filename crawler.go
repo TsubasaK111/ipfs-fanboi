@@ -27,13 +27,13 @@ func crawl() {
 	redditItems := convertRedditJson(redditJson)
 	twitterItems := convertTwitterJson(twitterJson)
 
-	aggregateItems := concatItems([]Items{
+	raggregateItems := concatItems([]Items{
 		githubItems,
 		redditItems,
 		twitterItems,
 	})
 
-	aggregateItems = sortItems(aggregateItems)
+	aggregateItems := sortItems(raggregateItems)
 
 	itemsJson := stringifyJson(aggregateItems)
 	writeJson(itemsJson, "./tmp/all.json")
